@@ -36,7 +36,7 @@ create table Students (StudentId INT PRIMARY KEY, Name VARCHAR(50), Age INT)
 
 -- 7
 
--- DQL – Data Query Language
+-- DQL ï¿½ Data Query Language
 --Use Fetch data
 
 --Command SELECT
@@ -44,7 +44,7 @@ create table Students (StudentId INT PRIMARY KEY, Name VARCHAR(50), Age INT)
 --Example:
 SELECT * FROM Students;
 
---DML – Data Manipulation Language
+--DML Data Manipulation Language
 --Use: Add, change, or remove data
 --Commands: INSERT, UPDATE, DELETE
 
@@ -53,7 +53,7 @@ SELECT * FROM Students;
 --UPDATE Users SET Name = 'Ilyas' WHERE ID = 1;
 --DELETE FROM Users WHERE ID = 1;
 
---DDL – Data Definition Language
+--DDL Data Definition Language
 --Use: Create or change tables
 --Commands: CREATE, ALTER, DROP
 
@@ -61,7 +61,7 @@ SELECT * FROM Students;
 --ALTER TABLE Users ADD Age INT;
 --DROP TABLE Users;
 
--- DCL – Data Control Language
+-- DCL Data Control Language
 --Use: Give or remove access
 --Commands: GRANT, REVOKE
 
@@ -70,7 +70,7 @@ SELECT * FROM Students;
 --REVOKE SELECT ON Users FROM user123;
 
 
---TCL – Transaction Control Language
+--TCL Transaction Control Language
 --Use: Manage transactions
 --Commands: COMMIT, ROLLBACK
 
