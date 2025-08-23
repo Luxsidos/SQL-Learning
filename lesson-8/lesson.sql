@@ -103,3 +103,87 @@ group by case
 	end
 
 
+
+
+CREATE TABLE bonuses (
+    id INT PRIMARY KEY,
+    employee_name VARCHAR(50),
+    month VARCHAR(7), -- Format: YYYY-MM
+    bonus_amount INT
+);
+
+INSERT INTO bonuses (id, employee_name, month, bonus_amount) VALUES
+(1, 'Ali', '2025-01', 200),
+(2, 'Ali', '2025-02', 250),
+(3, 'Vali', '2025-01', 100),
+(4, 'Vali', '2025-02', 150),
+(5, 'Guli', '2025-01', 300),
+(6, 'Guli', '2025-02', 350),
+(7, 'Guli', '2025-03', 400),
+(8, 'Nodira', '2025-02', 100),
+(9, 'Nodira', '2025-03', 120);
+
+--2. Eng ko‘p oy bonus olgan xodim(lar):
+
+--3. Har oy berilgan bonuslarning o‘rtachasi:
+
+
+select * from bonuses
+
+-- 1
+select month, max(bonus_amount) as bonus_amount from bonuses
+group by month
+
+-- 2
+select month, avg(bonus_amount) as bonus_amount from bonuses
+group by month
+
+select * from bonuses as a
+where bonus_amount = (select max(bonus_amount) from bonuses where a.bonus_amount = bonus_amount)
+
+
+CREATE TABLE Sales1 (    SaleID INT PRIMARY KEY,
+    ProductName VARCHAR(50),    Quantity INT,
+    Price DECIMAL(10,2));
+
+INSERT INTO Sales1 (SaleID, ProductName, Quantity, Price) VALUES(1, 'Laptop', 2, 800.00),
+(2, 'Phone', 3, 500.00),(3, 'Laptop', 1, 800.00),
+(4, 'Tablet', 5, 300.00),(5, 'Phone', 2, 500.00);
+
+/*1. Find Total Sales per Product
+Scenario:A store tracks sales data. Find the total sales for each product.
+*/
+
+select ProductName, SUM(Price * Quantity) as total_amount from Sales1
+group by ProductName
+
+select * from Sales1
+
+
+
+CREATE TABLE Sales3 (    SaleID INT,
+    ProductName VARCHAR(50),    Category VARCHAR(50),
+    Quantity INT,    UnitPrice DECIMAL(10,2),
+    SaleDate DATE,    Region VARCHAR(50)
+);
+INSERT INTO Sales3 (SaleID, ProductName, Category, Quantity, UnitPrice, SaleDate, Region) VALUES
+(1, 'iPhone 13', 'Electronics', 2, 999.99, '2025-06-01', 'Tashkent'),(2, 'MacBook Pro', 'Electronics', 1, 1999.99, '2025-06-03', 'Samarkand'),
+(3, 'Banana', 'Fruits', 10, 0.50, '2025-06-01', 'Tashkent'),(4, 'Orange', 'Fruits', 5, 0.70, '2025-06-02', 'Andijan'),
+(5, 'iPhone 13', 'Electronics', 1, 999.99, '2025-06-04', 'Tashkent'),(6, 'Banana', 'Fruits', 20, 0.45, '2025-06-03', 'Bukhara'),
+(7, 'MacBook Pro', 'Electronics', 1, 1999.99, '2025-06-06', 'Tashkent'),(8, 'Orange', 'Fruits', 7, 0.65, '2025-06-07', 'Bukhara'),
+(9, 'Banana', 'Fruits', 15, 0.48, '2025-06-08', 'Samarkand');
+Select * from Sales3
+--Har bir regionda o‘rtacha narxi 0.5 dan katta bo‘lgan mevalarni topish kerak
+
+select region, ProductName, avg(UnitPrice) as UnitPrice from Sales3
+where Category = 'Fruits'
+group by region, ProductName
+having avg(UnitPrice) > 0.5 
+
+
+select region, ProductName, avg(UnitPrice) as UnitPrice from Sales3
+group by region, ProductName, Category
+having avg(UnitPrice) > 0.5 and Category = 'Fruits'
+
+
+

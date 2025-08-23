@@ -177,3 +177,5 @@ where age > any (select age from Lecturers)
 
 select * from Students
 where age < all (select age from Lecturers)
+
+

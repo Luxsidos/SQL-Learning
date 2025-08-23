@@ -1,0 +1,4 @@
+﻿Msg 8120, Level 16, State 1, Line 339
+Column 'Products.Category' is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.
+
+Completion time: 2025-08-21T16:49:51.8519901+05:00
