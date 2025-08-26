@@ -449,4 +449,164 @@ INSERT INTO Sales (SaleID, ProductID, CustomerID, SaleDate, SaleAmount) VALUES
 (38, 8, 9, '2023-02-08', 500.00),
 (39, 9, 10, '2023-02-09', 550.00),
 (40, 10, 1, '2023-02-10', 600.00);
+
+
 -- 1
+select p.ProductName, s.SupplierName
+from Products p cross join Suppliers s
+
+-- 2
+select d.DepartmentName, e.Name
+from Departments d join Employees e
+on d.DepartmentID = e.DepartmentID
+
+
+-- 3
+select p.ProductName, s.SupplierName
+from Products p join Suppliers s
+on p.SupplierID = s.SupplierID
+
+-- 4
+select 
+	(c.FirstName + ' ' + c.LastName) as fullname,
+	o.OrderID
+from Orders o join Customers c
+on o.CustomerID = c.CustomerID
+
+-- 5
+select * 
+from Students s join Courses c
+on s.StudentID = c.CourseID
+
+-- 6
+select p.ProductName, o.OrderID
+from Products p join Orders o
+on p.ProductID = o.ProductID
+
+-- 7
+select d.DepartmentName, e.Name
+from Departments d join Employees e
+on d.DepartmentID = e.DepartmentID
+
+-- 8
+select s.Name, e.EnrollmentID
+from Students s join Enrollments e
+on s.StudentID = e.StudentID
+
+-- 9
+select *
+from Payments p join Orders o
+on p.OrderID = o.OrderID
+
+-- 10
+select *
+from Products p join Orders o
+on p.ProductID = o.ProductID
+where p.price > 100
+
+-- 11
+select d.DepartmentName, e.Name
+from Employees e join Departments d
+on e.DepartmentID != d.DepartmentID
+
+-- 12
+select *
+from Orders o join Products p
+on o.ProductID = p.ProductID
+where o.Quantity > p.StockQuantity
+
+-- 13
+select 
+	(c.FirstName + ' ' + c.LastName) as Fullname,
+	s.ProductID
+from Customers c join Sales s
+on c.CustomerID = s.CustomerID
+where s.SaleAmount > 500
+
+-- 14
+select s.Name, c.CourseName
+from Students s join Enrollments e
+on s.StudentID = e.StudentID
+join Courses c
+on c.CourseID = e.EnrollmentID
+
+-- 15
+select p.ProductName, s.SupplierName
+from Products p join Suppliers s
+on p.SupplierID = s.SupplierID
+where s.SupplierName like '%Tech%'
+
+-- 16
+select *
+from Orders o join Payments p
+on o.OrderID = p.OrderID
+where o.TotalAmount > p.Amount
+
+-- 17
+select e.Name, d.DepartmentName
+from Employees e join Departments d
+on e.DepartmentID = d.DepartmentID
+
+-- 18
+select *
+from Products p join Categories c
+on p.Category = c.CategoryID
+
+-- 19
+select c.FirstName, s.SaleAmount
+from Sales s join Customers c
+on s.CustomerID = c.CustomerID
+where c.Country = 'USA'
+
+-- 20
+select * 
+from Orders o join Customers c
+on o.CustomerID = c.CustomerID
+and c.Country = 'Germany'
+and o.TotalAmount > 100
+
+-- 21
+select * from Departments d
+cross apply (
+	select top 2 * 
+	from Employees e
+	where d.DepartmentID = e.DepartmentID
+	order by d.DepartmentName
+) e
+
+-- 22
+select * 
+from Payments p 
+join Orders o
+on p.OrderID = o.OrderID
+join Products pr
+on pr.ProductID = o.ProductID
+where p.Amount != (o.Quantity * pr.Price)
+
+-- 23
+
+select s.Name, s.Age, s.Major
+from Students s
+left join Enrollments e
+on s.StudentID = e.StudentID
+left join Courses c
+on c.CourseID = e.CourseID
+where e.StudentID is null
+
+
+-- 24
+select
+m.Name as manager_name, e.Name as employee_name,
+m.Salary as manager_salary, e.Salary as employee_salary
+from Employees e
+left join Employees m
+on m.EmployeeID = e.ManagerID
+where m.Salary <= e.Salary
+
+-- 25
+select c.FirstName, o.OrderID, p.PaymentID
+from Orders o
+full join Payments p on o.OrderID = p.OrderID
+full join Customers c on c.CustomerID = o.CustomerID
+where (not o.CustomerID is null) and p.PaymentID is null
+
